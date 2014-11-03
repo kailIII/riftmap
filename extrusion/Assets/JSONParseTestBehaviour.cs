@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using SimpleJSON;
 
 public class JSONParseTestBehaviour : MonoBehaviour {		
@@ -7,55 +8,86 @@ public class JSONParseTestBehaviour : MonoBehaviour {
 	
 	private string m_InGameLog = "";
 	private Vector2 m_Position = Vector2.zero;
+	private List<Feature> F;
+
 	void P(string aText)
 	{
 		m_InGameLog += aText + "\n";
 	}
 	
-	void Test()
+	void Parse()
 	{
-		/*var N = JSONNode.Parse("{\"name\":\"test\", \"array\":[1,{\"data\":\"value\"}]}");
-		P("'nice formatted' string representation of the JSON tree:");
-		P(N.ToString(""));
-		P("");*/
+		F = new List<Feature>();
 
 		var N = JSONNode.Parse (GEO_JSON.text);
-		P("'nice formatted' string representation of the JSON tree:");
-		P(N.ToString(""));
-		P("");
+		//P("");
+		JSONArray features = (JSONArray) N["features"];
+		P (features.Count.ToString ());
+		foreach (JSONNode feature in features) {
+			JSONNode geometry;
+			string name;
+			string id;
+			string type;
+			List<List<Vector2>> V = new List<List<Vector2>>();
 
+			geometry = feature["geometry"];
+			name = feature["properties"]["NAME"].Value;
+			id = feature["properties"]["GEO_ID"].Value;
+		//	P(name + " => " + id);
+			type = geometry["type"].Value;
 
+		
+			/*
+			 if (type == "OLDPolygon") {
+				JSONArray coordinatesArray = (JSONArray) geometry["coordinates"];
+				foreach (JSONArray coordinates in coordinatesArray) {
+					List<Vector2> lcoordinates = new List<Vector2>();
+					foreach(JSONArray point in coordinates) {
+						float x = point[0].AsFloat;
+						float y = point[1].AsFloat;
+						lcoordinates.Add (new Vector2(x, y));
+					}
+					V.Add(lcoordinates);
+				}
+			}
+			*/
+			if (type=="Polygon") {
+				List<Vector2> lcoordinates = new List<Vector2>();
+				foreach(JSONArray point in (JSONArray) geometry["coordinates"][0]) {
+					float x = point[0].AsFloat;
+					float y = point[1].AsFloat;
+					lcoordinates.Add (new Vector2(x, y));
+				}
+				V.Add(lcoordinates);
+			}
+			else if (type == "MultiPolygon") {
+				foreach (JSONArray c in (JSONArray) geometry["coordinates"]) {
+					List<Vector2> lcoordinates = new List<Vector2>();
+					foreach(JSONArray point in (JSONArray) c[0]) {
+						float x = point[0].AsFloat;
+						float y = point[1].AsFloat;
+						lcoordinates.Add (new Vector2(x, y));
+					}
+					V.Add(lcoordinates);
+				}
+			} else {
+				throw new System.SystemException("Not a Polygon and not a MultiPolygon");
+			}
 
+			F.Add (new Feature(name, id, V));
 
-		
-		/*P("'normal' string representation of the JSON tree:");
-		P(N.ToString());
-		P("");
-		
-		P("content of member 'name':");
-		P(N["name"]);
-		P("");
-		
-		P("content of member 'array':");
-		P(N["array"].ToString(""));
-		P("");
-		
-		P("first element of member 'array': " + N["array"][0]);
-		P("");
-		
-		N["array"][0].AsInt = 10;
-		P("value of the first element set to: " + N["array"][0]);
-		P("The value of the first element as integer: " + N["array"][0].AsInt);
-		P("");
-		
-		P("N[\"array\"][1][\"data\"] == " + N["array"][1]["data"]);
-		P("");
-		*/
+		} 
+
+		foreach (Feature f in F) {
+			P (f.ToString ());
+			P ("");
+		}
+
 	}
 	
 	void Start()
 	{
-		Test();
+		Parse();
 		Debug.Log("Test results:\n" + m_InGameLog);
 	}
 	void OnGUI()
