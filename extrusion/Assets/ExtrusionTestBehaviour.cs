@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Geom;
 
-public class ExtrusionTest : MonoBehaviour {
+public class ExtrusionTestBehaviour : MonoBehaviour {
 	private static Vector3[] TEST_POLY1 = {
 		new Vector3(4,0,4),
 		new Vector3(4,0,5),
