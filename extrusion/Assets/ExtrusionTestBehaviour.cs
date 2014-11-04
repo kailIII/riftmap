@@ -37,12 +37,6 @@ public class ExtrusionTestBehaviour : MonoBehaviour {
 			o.AddComponent("MeshRenderer");
 			Extrusion e = Extrusion.ExtrudeY(shape, 1.0f);
 			e.LoadMesh(o.GetComponent<MeshFilter>().mesh);
-		
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }
