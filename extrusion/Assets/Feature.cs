@@ -5,9 +5,9 @@ using System.Text;
 
 public class Feature {
 
-	private List<List<Vector2>> polygons;
-	private string name;
-	private string id;
+	public List<List<Vector2>> polygons;
+	public string name;
+	public string id;
 		
 	public Feature(string name, string id, List<List<Vector2>> polygons) {
 		this.name = name;
@@ -25,5 +25,7 @@ public class Feature {
 		}
 		return sb.ToString ();
 	} 
+
+
 
 }

@@ -33,8 +33,8 @@ public class GeoJSONParser{
 			if (type=="Polygon") {
 				List<Vector2> lcoordinates = new List<Vector2>();
 				foreach(JSONArray point in (JSONArray) geometry["coordinates"][0]) {
-					float x = point[0].AsFloat;
-					float y = point[1].AsFloat;
+					float x =  point[0].AsFloat;
+					float y = point[1].AsFloat; 
 					lcoordinates.Add (new Vector2(x, y));
 				}
 				V.Add(lcoordinates);
