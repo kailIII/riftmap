@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 46f07fb60cf9b4b9f9130bc929a598b9
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - GEO_JSON: {fileID: 4900000, guid: 1121284dc673c453f9e277dc2de30c3a, type: 3}
+  - DATA: {fileID: 4900000, guid: a66f62ba828934301b829fd41f14fdf7, type: 3}
+  - renderMaterial: {fileID: 2100000, guid: 8e97406e4f5b5480089244f69460fb17, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
