@@ -1,27 +1,16 @@
-RiftMap
-by: Sam Halperin 
-sam@samhalperin.com
-http://www.github/shalperin
+# RiftMap #
+## by: Sam Halperin ##
 
-Notes
-=====
-See the issues on github, there are some fairly serious open problems with 
-this software.  (It's a proof of concept.)  Particularly in the tesselation
-algorithm.  Map kind of looks like swiss cheese right now.
-
-How To See The Demo
-===================
-Look in in the builds folder at the root of the project for an executable.
+An Oculus Rift mapping demo comparing current and historical US obesity rates.
 
 
-How To Modify The Program For Your Use
-======================================
-+ Open the project in unity.
-+ There are GeoJSON files in Assets/GeoJSON
-+ There are example data files in Assets/Data
-+ Select the game object Scripts/StateShapeTestRoot in the hierarchy. Look at the inspector:
-    * Drag a GeoJSON file onto the GEOJson field.
-    * Drag a data file onto the Data field.
-+ Back in the hierarchy, in CharacterControllers, there are 2 - one is for the oculus rift, and one is
-not.  Enable one or the other as needed.
-+ Build for your platform.
+<a href="http://vimeo.com/shalperin/3d-obesity-map"><img src="https://raw.githubusercontent.com/shalperin/riftmap/master/vimeo.png"></img>
+
+# Builds / Executables #
+[Hosted on google drive.](https://drive.google.com/folderview?id=0B_30ya1OhlSBflAwdjRLYkREVmJsV1FNa2VhaTUxZkhiNzh4bVpVeEI0b2FxNWdsUm1jdjg&usp=sharing)
+
+#What's in this repo?#
++ /unity/Assets/Scripts/Geom : 3D extrusion classes 
++ /unity/Assets/Scripts/GIS : GeoJSON parser and "Feature" data structure
++ /unity/Assets/Scripts/Demo : bringing it all together
+
